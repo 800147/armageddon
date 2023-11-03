@@ -5,14 +5,13 @@ import Neo__ from "./Neo.module.css";
 import { useRequest } from "@/helpers/hooks/useRequest";
 import { INearEarthObject, neo_GET } from "@/app/api/neo/neo_client";
 import { InfiniteScrollLoader } from "@/components/InfiniteScrollLoader/InfiniteScrollLoader";
-import cn from 'classnames';
 import useStorage from "@/helpers/hooks/useStorage";
 import { Asteroid } from "@/components/Asteroid/Asteroid";
 import Link from "next/link";
 
 const formatDate = (date: Date) => `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}-${String(date.getUTCDate()).padStart(2, '0')}`;
 
-const Neo: FunctionComponent<{className?: string}> = ({className}) => {
+const Neo: FunctionComponent = () => {
   const [all, setAll] = useState<INearEarthObject[]>([]);
   const [get, neo, error] = useRequest(neo_GET);
 
@@ -52,10 +51,10 @@ const Neo: FunctionComponent<{className?: string}> = ({className}) => {
   const order = useMemo(() => JSON.parse(orderString ?? '{}') as Record<string, INearEarthObject>, [orderString]);
   const addOrder = useCallback((object: INearEarthObject) => {
     setOrder(JSON.stringify({...order, [object.id]: object}));
-  }, [order]);
+  }, [order, setOrder]);
 
   return (
-    <div className={cn(Neo__.Root, className)}>
+    <div className={Neo__.Root}>
       <h2 className={Neo__.Title}>Ближайшие подлёты астероидов</h2>
       <Order orderCount={Object.keys(order).length} />
       {all.map(object => <Asteroid key={object.id} object={object} addOrder={addOrder} isOrdered={order[object.id] !== undefined} />)}

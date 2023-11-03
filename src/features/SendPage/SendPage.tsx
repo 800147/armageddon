@@ -13,7 +13,7 @@ const SendPage: FunctionComponent<{className?: string}> = ({className}) => {
 
   const order = useMemo(() => JSON.parse(firstOrderString ?? '{}') as Record<string, INearEarthObject>, [firstOrderString]);
   const addOrder = useCallback(() => {}, []);
-  useEffect(() => setOrder('[]'), []);
+  useEffect(() => setOrder('[]'), [setOrder]);
 
   return (
     <div className={cn(SendPage__.Root, className)}>

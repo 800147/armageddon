@@ -12,19 +12,15 @@ const useStorage: (
   key,
   type = "local"
 ) => {
-    if (typeof window === 'undefined') {
-        return [null, () => {}];
-    }
-
-  const storage = type === "local" ? localStorage : sessionStorage;
-  const [value, setValue] = useState(storage.getItem(key));
+  const storage = typeof window === 'undefined' ? undefined : type === "local" ? localStorage : sessionStorage;
+  const [value, setValue] = useState(storage?.getItem(key));
 
   const changeValue = useCallback(
     (newValue: string | null) => {
       if (newValue === null) {
-        storage.removeItem(key);
+        storage?.removeItem(key);
       } else {
-        storage.setItem(key, newValue);
+        storage?.setItem(key, newValue);
       }
 
       window.dispatchEvent(new Event(STORAGE_CHANGED_EVENT_TYPE));
@@ -33,7 +29,7 @@ const useStorage: (
   );
 
   const onValueChange = useCallback(
-    () => setValue(storage.getItem(key)),
+    () => setValue(storage?.getItem(key)),
     [setValue, key, storage]
   );
 
