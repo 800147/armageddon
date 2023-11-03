@@ -30,3 +30,20 @@
   color: inherit;
   text-decoration: none;
 }
+
+.Planet {
+  position: fixed;
+  right: calc(100% - 48px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (min-width: 1000px) {
+  .Planet {
+    position: fixed;
+    right: unset;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

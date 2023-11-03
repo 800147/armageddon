@@ -14,7 +14,6 @@ const formatDate = (date: Date) => `${date.getUTCFullYear()}-${String(date.getUT
 const Neo: FunctionComponent = () => {
   const [all, setAll] = useState<INearEarthObject[]>([]);
   const [get, neo, error] = useRequest(neo_GET);
-
   const loadNext = useCallback(
     () => {
       if (!neo) {

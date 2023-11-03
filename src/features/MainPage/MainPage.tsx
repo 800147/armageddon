@@ -3,6 +3,7 @@ import MainPage__ from "./MainPage.module.css";
 import { Passion_One } from 'next/font/google';
 import cn from 'classnames';
 import Link from "next/link";
+import Image from "next/image";
  
 export const passion_one = Passion_One({
   subsets: ['latin'],
@@ -20,6 +21,7 @@ const MainPage: FunctionComponent<{children?: ReactNode}> = ({children}) => (
         Взрываем астероиды с 1998 года.
       </p>
     </header>
+    <Image  className={MainPage__.Planet} src='/planet.png' width={304} height={436} alt={"planet as backgroung image"}  />
     <div className={MainPage__.Feed}>
     {children}
     </div>
