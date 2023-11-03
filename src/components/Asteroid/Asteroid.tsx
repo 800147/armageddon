@@ -1,7 +1,8 @@
-import { FunctionComponent, useCallback, useMemo, useState } from "react";
+import { FunctionComponent, useCallback, useMemo } from "react";
 import Asteroid__ from "./Asteroid.module.css";
 import { INearEarthObject } from "@/app/api/neo/neo_client";
-import Neo from "@/features/Neo/Neo";
+import Image from "next/image";
+import cn from 'classnames';
 
 export const Asteroid:FunctionComponent<{isInOrder?: boolean; className?: string, object: INearEarthObject, isLunar?: boolean, isOrdered?: boolean, addOrder: (object: INearEarthObject) => void }> = ({object, className, isLunar = true, isOrdered, addOrder, isInOrder}) => {
   const {name, is_potentially_hazardous_asteroid, close_approach_data, estimated_diameter: {meters: { estimated_diameter_max }}} = object;
@@ -17,7 +18,7 @@ export const Asteroid:FunctionComponent<{isInOrder?: boolean; className?: string
       <div className={Asteroid__.Distance}><span>
         { isLunar ? `${Math.round(Number(lunar))} лунных орбит` : `${Math.round(Number(kilometers))} км`}
         </span></div>
-      <div className={Asteroid__.Image}></div>
+      <Image className={cn(Asteroid__.Image, estimated_diameter_max < 100 && Asteroid__.Image_small)} src="/asteroid.png" width={37} height={40} alt="size view" />
       <div className={Asteroid__.Other}>
         <div className={Asteroid__.Name}>
           {shortName}
