@@ -18,7 +18,7 @@ const SendPage: FunctionComponent<{className?: string}> = ({className}) => {
   return (
     <div className={cn(SendPage__.Root, className)}>
       <h2 className={SendPage__.Title}>Заказ отправлен!</h2>
-      {Object.values(order).map(object => <Asteroid key={object.id} object={object} addOrder={addOrder} />)}
+      {Object.values(order).map(object => <Asteroid key={object.id} object={object} addOrder={addOrder} isInOrder />)}
     </div>
   );
 };

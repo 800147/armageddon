@@ -1,6 +1,7 @@
 import { FunctionComponent, useCallback, useMemo, useState } from "react";
 import Asteroid__ from "./Asteroid.module.css";
 import { INearEarthObject } from "@/app/api/neo/neo_client";
+import Neo from "@/features/Neo/Neo";
 
 export const Asteroid:FunctionComponent<{isInOrder?: boolean; className?: string, object: INearEarthObject, isLunar?: boolean, isOrdered?: boolean, addOrder: (object: INearEarthObject) => void }> = ({object, className, isLunar = true, isOrdered, addOrder, isInOrder}) => {
   const {name, is_potentially_hazardous_asteroid, close_approach_data, estimated_diameter: {meters: { estimated_diameter_max }}} = object;
@@ -22,14 +23,14 @@ export const Asteroid:FunctionComponent<{isInOrder?: boolean; className?: string
           {shortName}
         </div>
         <div className={Asteroid__.Diameter}>
-          {Math.round(estimated_diameter_max)} м
+        Ø {Math.round(estimated_diameter_max)} м
         </div>
       </div>
     </div>
     <div className={Asteroid__.Footer}>
         {!isInOrder &&
       (isOrdered ? <div>В корзине</div> : <button type="button" onClick={onOrderClick}>Заказать</button>)}
-      {is_potentially_hazardous_asteroid && <div>Опасен</div>}
+      {is_potentially_hazardous_asteroid && <div className={Asteroid__.Dangerous}>⚠ Опасен</div>}
     </div>
   </div>
 }

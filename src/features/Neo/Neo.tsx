@@ -8,6 +8,7 @@ import { InfiniteScrollLoader } from "@/components/InfiniteScrollLoader/Infinite
 import useStorage from "@/helpers/hooks/useStorage";
 import { Asteroid } from "@/components/Asteroid/Asteroid";
 import Link from "next/link";
+import cn from 'classnames';
 
 const formatDate = (date: Date) => `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}-${String(date.getUTCDate()).padStart(2, '0')}`;
 
@@ -52,11 +53,20 @@ const Neo: FunctionComponent = () => {
     setOrder(JSON.stringify({...order, [object.id]: object}));
   }, [order, setOrder]);
 
+  const [isLunar, setLunar] = useState(true);
+  const toLunar = useCallback(() => setLunar(true), [setLunar]);
+  const toKm = useCallback(() => setLunar(false), [setLunar]);
+
   return (
     <div className={Neo__.Root}>
       <h2 className={Neo__.Title}>Ближайшие подлёты астероидов</h2>
       <Order orderCount={Object.keys(order).length} />
-      {all.map(object => <Asteroid key={object.id} object={object} addOrder={addOrder} isOrdered={order[object.id] !== undefined} />)}
+      <div className={Neo__.Swith}>
+        <button type="button" className={cn(Neo__.SwitchButton, !isLunar && Neo__.SwitchButton_active)} onClick={toKm}>в километрах</button>
+       {' | '}
+        <button type="button" className={cn(Neo__.SwitchButton, isLunar && Neo__.SwitchButton_active)} onClick={toLunar}>в лунных орбитах</button>
+      </div>
+      {all.map(object => <Asteroid key={object.id} object={object} addOrder={addOrder} isLunar={isLunar} isOrdered={order[object.id] !== undefined} />)}
       {error && <p>ERROR: {error.message}</p>}
       {!error && (
         <>

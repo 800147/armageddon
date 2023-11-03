@@ -58,3 +58,24 @@ line-height: 24px;
     border-radius: 24px;
   }
 }
+
+.Switch {
+  margin-top: 8px;
+  line-height: 24px;
+}
+
+.SwitchButton {
+  appearance: none;
+  display: inline;
+  font: inherit;
+  padding: 0;
+  background: none;
+  border: none;
+  line-height: inherit;
+  text-decoration: underline;
+}
+
+.SwitchButton_active {
+  text-decoration: none;
+  font-weight: 700;
+}
