@@ -18,8 +18,13 @@
   line-height: 1.5;
 }
 .Feed {
-  margin-left: 362px;
+  margin-left: 72px;
   max-width: 402px;
+}
+@media (min-width: 1000px) {
+  .Feed {
+    margin-left: 362px;
+  }
 }
 .Link {
   color: inherit;
