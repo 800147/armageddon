@@ -17,7 +17,11 @@
   margin: 0;
   line-height: 1.5;
 }
-.Neo {
+.Feed {
   margin-left: 362px;
   max-width: 402px;
+}
+.Link {
+  color: inherit;
+  text-decoration: none;
 }

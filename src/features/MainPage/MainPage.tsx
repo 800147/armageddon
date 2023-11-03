@@ -1,8 +1,8 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, ReactNode } from "react";
 import MainPage__ from "./MainPage.module.css";
-import { Neo } from "../Neo/Neo";
 import { Passion_One } from 'next/font/google';
 import cn from 'classnames';
+import Link from "next/link";
  
 export const passion_one = Passion_One({
   subsets: ['latin'],
@@ -10,17 +10,19 @@ export const passion_one = Passion_One({
   weight: '400',
 });
 
-const MainPage: FunctionComponent = () => (
+const MainPage: FunctionComponent<{children?: ReactNode}> = ({children}) => (
   <main className={MainPage__.Root}>
     <header className={MainPage__.Header}>
-      <h1 className={cn(MainPage__.Title, passion_one.className)}>Armageddon 2023</h1>
+      <h1 className={cn(MainPage__.Title, passion_one.className)}><Link className={MainPage__.Link} href={'/'}>Armageddon 2023</Link></h1>
       <p className={MainPage__.Text}>
         ООО “Команда им. Б. Уиллиса”.
         <br />
         Взрываем астероиды с 1998 года.
       </p>
     </header>
-    <Neo className={MainPage__.Neo} />
+    <div className={MainPage__.Feed}>
+    {children}
+    </div>
   </main>
 );
 

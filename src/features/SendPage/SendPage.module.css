@@ -1,0 +1,11 @@
+.Root {
+  padding: 1rem;
+  display: grid;
+  gap: 24px;
+}
+.Title {
+  font-weight: 700; 
+  font-size: 28px;
+  line-height: 36px;
+  margin: 0;
+}

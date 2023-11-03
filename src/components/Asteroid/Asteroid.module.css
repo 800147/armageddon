@@ -1,0 +1,32 @@
+.Root {
+display: grid;
+gap: 8px;
+}
+.Date {
+font-size: 24px;
+font-weight: 700;
+line-height: 32px; /* 133.333% */
+}
+.Row {
+display: flex;
+gap: 8px;
+}
+.Distance {
+font-size: 16px;
+line-height: 24px;
+}
+.Name {
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 24px; /* 150% */
+text-decoration-line: underline; 
+}
+.Diameter {
+/* Desktop/Body Micro */
+font-family: Helvetica;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 16px; /* 133.333% */
+}

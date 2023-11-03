@@ -1,2 +1,2 @@
-export * from "@/features/MainPage/MainPage";
-export { default } from "@/features/MainPage/MainPage";
+export * from "@/features/Neo/Neo";
+export { default } from "@/features/Neo/Neo";

@@ -6,14 +6,15 @@ import { useRequest } from "@/helpers/hooks/useRequest";
 import { INearEarthObject, neo_GET } from "@/app/api/neo/neo_client";
 import { InfiniteScrollLoader } from "@/components/InfiniteScrollLoader/InfiniteScrollLoader";
 import cn from 'classnames';
+import useStorage from "@/helpers/hooks/useStorage";
+import { Asteroid } from "@/components/Asteroid/Asteroid";
+import Link from "next/link";
 
 const formatDate = (date: Date) => `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}-${String(date.getUTCDate()).padStart(2, '0')}`;
 
-export const Neo: FunctionComponent<{className?: string}> = ({className}) => {
+const Neo: FunctionComponent<{className?: string}> = ({className}) => {
   const [all, setAll] = useState<INearEarthObject[]>([]);
   const [get, neo, error] = useRequest(neo_GET);
-
-  const today = useMemo(() => new Date(), []);
 
   const loadNext = useCallback(
     () => {
@@ -35,7 +36,7 @@ export const Neo: FunctionComponent<{className?: string}> = ({className}) => {
 
       get(startDate, endDate);
     },
-    [get, neo, today]
+    [get, neo]
   );
 
   useEffect(() => {
@@ -46,14 +47,23 @@ export const Neo: FunctionComponent<{className?: string}> = ({className}) => {
     setAll(oldAll => [...oldAll, ...Object.values(neo.near_earth_objects).flat()]);
   }, [neo, setAll]);
 
+  const [orderString, setOrder] = useStorage('order');
+
+  const order = useMemo(() => JSON.parse(orderString ?? '{}') as Record<string, INearEarthObject>, [orderString]);
+  const addOrder = useCallback((object: INearEarthObject) => {
+    setOrder(JSON.stringify({...order, [object.id]: object}));
+  }, [order]);
+
   return (
     <div className={cn(Neo__.Root, className)}>
       <h2 className={Neo__.Title}>Ближайшие подлёты астероидов</h2>
-      {all.map(object => <Asteroid key={object.id} object={object} />)}
+      <Order orderCount={Object.keys(order).length} />
+      {all.map(object => <Asteroid key={object.id} object={object} addOrder={addOrder} isOrdered={order[object.id] !== undefined} />)}
       {error && <p>ERROR: {error.message}</p>}
       {!error && (
         <>
           <InfiniteScrollLoader
+            key={neo?.links.next}
             loadFunction={loadNext}
           />
           <p>Loading...</p>
@@ -63,28 +73,12 @@ export const Neo: FunctionComponent<{className?: string}> = ({className}) => {
   );
 };
 
-const Asteroid:FunctionComponent<{className?: string, object: INearEarthObject, isLunar?: boolean, isOrdered?: boolean}> = ({object, className, isLunar = false, isOrdered}) => {
-  const {id, name, is_potentially_hazardous_asteroid, close_approach_data, estimated_diameter: {meters: { estimated_diameter_max }}} = object;
-  const {close_approach_date, miss_distance: {lunar, kilometers}} = close_approach_data[0];
-
-  const shortName = name.match(/\((.*)\)/)?.[1] ?? name;
-
-  return <div className={Neo__.Asteroid}>
-    <div className={Neo__.AsteroidDate}>{close_approach_date}</div>
-    <div className={Neo__.AsteroidRow}>
-      <div className={Neo__.AsteroidDistance}><span>{Math.round(Number(kilometers))} км</span></div>
-      <div className={Neo__.AsteroidImage}></div>
-      <div className={Neo__.AsteroidOther}>
-        <div className={Neo__.AsteroidName}>
-          {shortName}
-        </div>
-        <div className={Neo__.AsteroidDiameter}>
-          {Math.round(estimated_diameter_max)} м
-        </div>
-      </div>
-    </div>
-    <div className={Neo__.AsteroidFooter}>
-      {isOrdered ? <div>В корзине</div> : <button type="button">Заказать</button>}
-    </div>
+const Order:FunctionComponent<{orderCount: number}> = ({orderCount}) => (Boolean(orderCount) && <div className={Neo__.Order}>
+  <div>
+    <div className={Neo__.OrderTitle}>Корзина</div>
+    <div className={Neo__.OrderCount}>{orderCount} астероидов</div>
   </div>
-}
+  <Link href="/send" className={Neo__.OrderSend}>Отправить</Link>
+</div>)
+
+export default Neo;

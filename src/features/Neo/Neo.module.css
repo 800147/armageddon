@@ -2,6 +2,7 @@
   padding: 1rem;
   display: grid;
   gap: 24px;
+  position: relative;
 }
 .Title {
   font-weight: 700; 
@@ -9,35 +10,51 @@
   line-height: 36px;
   margin: 0;
 }
-.Asteroid {
-  display: grid;
-  gap: 8px;
-}
-.AsteroidDate {
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 32px; /* 133.333% */
-}
-.AsteroidRow {
+
+.Order {
+  padding: 16px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #232526;
   display: flex;
-  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
 }
-.AsteroidDistance {
+.OrderTitle {
+  font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: 24px;
+}
+.OrderCount {
   font-size: 16px;
-  line-height: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px;
 }
-.AsteroidName {
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px; /* 150% */
-  text-decoration-line: underline; 
+.OrderSend {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 100px;
+  height: 48px;
+  text-decoration: none;
+  color: var(--white-base);
+  background-color: var(--orange-base);
 }
-.AsteroidDiameter {
-  /* Desktop/Body Micro */
-  font-family: Helvetica;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 16px; /* 133.333% */
+
+@media (min-width: 1000px) {
+  .Order {
+    padding: 16px;
+    position: fixed;
+    top: 76px;
+    left: 764px;
+    display: grid;
+    gap: 32px;
+    width: max-content;
+    height: max-content;
+    border-radius: 24px;
+  }
 }

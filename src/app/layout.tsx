@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from 'next/font/local';
 import "./globals.css";
+import MainPage from "@/features/MainPage/MainPage";
 
 const helvetica = localFont({
   src: [
@@ -33,7 +34,7 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="color-scheme" content="dark" />
       </head>
-      <body className={helvetica.className}>{children}</body>
+      <body className={helvetica.className}><MainPage>{children}</MainPage></body>
     </html>
   );
 }
