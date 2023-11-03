@@ -17,6 +17,12 @@ font-size: 16px;
 line-height: 24px;
 }
 .Name {
+    appearance: none;
+    font: inherit;
+    padding: 0;
+    background: none;
+    border: none;
+    line-height: inherit;
 font-size: 16px;
 font-style: normal;
 font-weight: 700;
@@ -40,4 +46,29 @@ line-height: 16px; /* 133.333% */
 .Image_small {
 width: 22px;
 height: 24px;
+}
+
+.FullBack {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    appearance: none;
+    background-color: rgba(0,0,0,0.7);
+    border: none;
+    z-index: 1;
+}
+.Full {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: 400px;
+    max-width: calc(100% - 32px);
+    box-sizing: border-box;
+    height: max-content;
+    appearance: none;
+    background-color: #232526;
+    border: none;
+    border-radius: 24px;
+    z-index: 1;
+    padding: 16px;
 }
