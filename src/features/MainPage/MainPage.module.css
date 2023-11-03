@@ -1,0 +1,23 @@
+.Root {
+}
+
+.Header {
+  padding: 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.Title {
+  color: var(--orange-base);
+  text-transform: uppercase;
+  font-size: 2rem;
+  margin: 0;
+}
+.Text {
+  margin: 0;
+  line-height: 1.5;
+}
+.Neo {
+  margin-left: 362px;
+  max-width: 402px;
+}
