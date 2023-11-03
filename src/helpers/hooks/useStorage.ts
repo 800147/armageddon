@@ -43,7 +43,7 @@ const useStorage: (
     };
   }, [onValueChange]);
 
-  return [value, changeValue];
+  return [value ?? null, changeValue];
 };
 
 export default useStorage;
