@@ -15,7 +15,7 @@ export const InfiniteScrollLoader: FunctionComponent<
 
   useEffect(() => {
     onceCalled.current = false;
-  }, [loadFunction, onceCalled])
+  }, [loadFunction, onceCalled]);
 
   useEffect(() => {
     if (!el) {

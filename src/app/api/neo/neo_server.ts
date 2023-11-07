@@ -7,7 +7,9 @@ export async function GET(request: NextRequest) {
     const startDate = getUrlParam(request, "startDate", true);
     const endDate = getUrlParam(request, "endDate", true);
 
-    const result = await fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${startDate}&end_date=${endDate}&detailed=false&api_key=${process.env.API_KEY}`)
+    const result = await fetch(
+      `https://api.nasa.gov/neo/rest/v1/feed?start_date=${startDate}&end_date=${endDate}&detailed=false&api_key=${process.env.API_KEY}`
+    );
 
     const data = await result.json();
 

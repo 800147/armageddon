@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState, useCallback, useEffect } from "react";
 const STORAGE_CHANGED_EVENT_TYPE = "STORAGE_CHANGED_EVENT_TYPE";
@@ -12,7 +12,12 @@ const useStorage: (
   key,
   type = "local"
 ) => {
-  const storage = typeof window === 'undefined' ? undefined : type === "local" ? localStorage : sessionStorage;
+  const storage =
+    typeof window === "undefined"
+      ? undefined
+      : type === "local"
+      ? localStorage
+      : sessionStorage;
   const [value, setValue] = useState(storage?.getItem(key));
 
   const changeValue = useCallback(
